@@ -1,10 +1,21 @@
-def most_frequent(str1):
-    dict = {}
-    for n in str1:
-        keys = dict.keys()
-        if n in keys:
-            dict[n] += 1
-        else:
-            dict[n] = 1
-    return dict
-print(most_frequent('Mississippi'))
+text = 'Mississippi'
+
+
+def make_dict(x):
+    dictionary = {}
+    for letter in x:
+        dictionary[letter] = 1 + dictionary.get(letter, 0)
+    return dictionary
+
+
+def most_frequent(text):
+    letters = [letter.lower() for letter in text if letter.isalpha()]
+    dictionary = make_dict(letters)
+    result = []
+    for key in dictionary:
+        result.append((dictionary[key], key))
+    result.sort(reverse=True)
+    for count, letter in result:
+        print(f"{letter}= 0{count}",end=" ")
+
+most_frequent(text)
